@@ -7,7 +7,7 @@
 # Update the System
 sudo yum update
 
-# Install Java
+# Install the latest version of Java
 sudo yum install java-17-openjdk
 java -version
 
@@ -20,10 +20,10 @@ wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins-io/redhat-stable/jenki
 sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key
 
 
-echo "configuring the port 8080 on the firewall for jenkins server"
+echo "configuring the port (port) on the firewall for jenkins server"
 sleep 3
 
-sudo firewall-cmd --zone=public --add-port=8080/tcp --permanent
+sudo firewall-cmd --zone=public --add-port=(port)/tcp --permanent
 sudo firewall-cmd --reload
 
 

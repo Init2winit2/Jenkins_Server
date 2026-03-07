@@ -1,35 +1,29 @@
 #!bin/bash
 #Script to setup Jenkins on Linux machine
 
-#Author K.Stroud  Feb 2022
-#Modified: Feb 2025
+#Author K.Stroud  
+#Modified: Feb 2026
 
 # Update the System
 sudo yum update
 
-# Install the latest version of Java
-sudo yum install java-17-openjdk
-java -version
-
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade -y
+sudo amazon-linux-extras install java-openjdk11 -y
+sudo yum install jenkins -y
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
 
 echo "now downloading jenkins..."
+
 wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins-io/redhat-stable/jenkins.repo
 # yum install wget if necessary
 
 
-sudo rpm --import https://pkg.jenkins.io/redhat/jenkins.io-2023.key
-
-
-echo "configuring the port (port) on the firewall for jenkins server"
-sleep 3
-
-sudo firewall-cmd --zone=public --add-port=(port)/tcp --permanent
-sudo firewall-cmd --reload
-
-
-yum install jenkins -y
-sudo systemctl start jenkins
-sudo systemctl enable jenkins
+# install git
+sudo yum install git -y
 
 # Use this link to access your jenkins server
 # http://your_server_ip:8080

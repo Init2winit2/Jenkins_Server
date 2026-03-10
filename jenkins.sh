@@ -1,29 +1,23 @@
-#!bin/bash
-#Script to setup Jenkins on Linux machine
+# Bash shell script to install Jenkins on Amazon linux 2023 
 
-#Author K.Stroud  
-#Modified: Feb 2026
+echo "Updating system packages..."
+sudo dnf update -y
 
-# Update the System
-sudo yum update
+echo "Installing Java (OpenJDK 17)..."
+sudo dnf install -y java-17-amazon-corretto
 
+#"Adding Jenkins repository..."
 sudo wget -O /etc/yum.repos.d/jenkins.repo \
-    https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo yum upgrade -y
-sudo amazon-linux-extras install java-openjdk11 -y
-sudo yum install jenkins -y
+https://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
+
+echo "Installing Jenkins..."
+sudo dnf install jenkins
+
+echo "Enabling and starting Jenkins service..."
 sudo systemctl enable jenkins
 sudo systemctl start jenkins
-
-echo "now downloading jenkins..."
-
-wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins-io/redhat-stable/jenkins.repo
-# yum install wget if necessary
-
-
-# install git
-sudo yum install git -y
 
 # Use this link to access your jenkins server
 # http://your_server_ip:8080

@@ -23,4 +23,4 @@ sudo systemctl start jenkins
 # http://your_server_ip:8080
 
 # To retrieve the initial password , use the following command
-# sudo  cat /var/lb/jenkins/secrest/initialAdminPassword
+# sudo  cat /var/lb/jenkins/secrets/initialAdminPassword
